@@ -11,6 +11,9 @@ class User {
         'database' => 'Bureaucrat',
         'username' => 'bmaple',
         'password' => 'security');
+    function RedirectToURL(){
+        header("location: $url");
+    }
     function login(){
         if (empty($_POST['username']))
         {
@@ -33,14 +36,14 @@ class User {
         return true;
     }
     //function HandleError($error) {
-        //$this->error_message    
+    //$this->error_message    
     //}
     function GetLoginSessionVar()
     {
-    return md5($this->$randSess);
+        return md5($this->$randSess);
     }
     function auth(){
-            $this->dbConnection= new mysqli(
+        $this->dbConnection = new mysqli(
             $this->mysql['host'], 
             $this->mysql['username'], 
             $this->mysql['password'], 
@@ -50,8 +53,8 @@ class User {
             return false;
         }
         $auth_query="select password from users where username=$this->username";
-            $result = mysqli_query($auth_query);
-        mysqli_close($dbConnection); 
+        $result = mysqli_query($this->dbConnection, $auth_query);
+        mysqli_close($this->dbConnection); 
         if($this->password == $result)
             return true;
         return false;

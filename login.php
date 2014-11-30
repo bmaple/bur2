@@ -3,7 +3,8 @@ require_once('User.php');
 $user = new User();
 if(isset($_POST['submit'])){
     if($user->login()){
-        $user->RedirectToURL(landing.php);
+        header("location:landing.php");
+        exit;
     }
 }
 ?>
@@ -17,7 +18,7 @@ if(isset($_POST['submit'])){
 <input type='text' name='username' id='username' maxlength='20' /> <br />
 <label for="password">Password: </label>
 <input type='password' name='password' id='password' maxlength='20' /> <br />
-<input type='submit' name='submit' id='submit' />
+<input type='submit' name='submit' id='submit'value="submit" />
 </form>
 </body>
 </html>
