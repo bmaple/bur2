@@ -14,6 +14,12 @@ class User {
     function RedirectToURL(){
         header("location: $url");
     }
+    function checkLogin(){
+        $thisSess = $this->GetLoginSessionVar();
+        if(empty($_SESSION[$thisSess]))
+            return false;
+        return true;
+    }
     function login(){
         if (empty($_POST['username']))
         {
