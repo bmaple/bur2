@@ -2,6 +2,7 @@
 require_once('User.php');
 $user = new User();
 if(isset($_POST['submit'])){
+    print $user->login();
     if($user->login()){
         header("location:landing.php");
         exit;

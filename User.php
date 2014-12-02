@@ -32,7 +32,7 @@ class User {
             return false;
         }
         session_start();
-        $_SESSION[$this->GetLoginSessionVar()] = $this->$username;
+        $_SESSION[$this->GetLoginSessionVar()] = $this->username;
         return true;
     }
     //function HandleError($error) {
@@ -40,7 +40,7 @@ class User {
     //}
     function GetLoginSessionVar()
     {
-        return md5($this->$randSess);
+        return md5($this->randSess);
     }
     function auth(){
         $this->dbConnection = new mysqli(
@@ -52,10 +52,12 @@ class User {
         if($this->dbConnection->connect_errno){
             return false;
         }
-        $auth_query="select password from users where username=$this->username";
+        $auth_query="select password from users where username='$this->username'";
         $result = mysqli_query($this->dbConnection, $auth_query);
+        $row = mysqli_fetch_row($result);
+        echo $row[0];
         mysqli_close($this->dbConnection); 
-        if($this->password == $result)
+        if($this->password == $row[0])
             return true;
         return false;
     }
