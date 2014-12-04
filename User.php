@@ -1,9 +1,9 @@
 <?php
 class User {
     var $username;
-    var $password;
-    var $dbConnection;
-    var $randSess = "aer23fwef";
+    private $password;
+    private $dbConnection;
+    private $randSess = "aer23fwef";
     var $errors = array();
     var $mysql = array(  
         'host' => 'bur.ccg2fbosv7le.us-west-2.rds.amazonaws.com',
@@ -20,6 +20,49 @@ class User {
             return false;
         return true;
     }
+    function register(){
+        if (empty($_POST['username']))
+        {
+            //$this->HandleError("Please enter a username");
+            return false;
+        }
+        if (empty($_POST['password']))
+        {
+            //$this->HandleError("Please enter a password");
+            return false;
+        }
+        if (empty($_POST['passCopy']) && $_POST('password') != $_POST['passCopy'])
+        {
+            //$this->HandleError("Please enter a password");
+            return false;
+        }
+        $this->dbConnection = new mysqli(
+            $this->mysql['host'], 
+            $this->mysql['username'], 
+            $this->mysql['password'], 
+            $this->mysql['database'], 
+            $this->mysql['port']);                      
+        if($this->dbConnection->connect_errno){
+            mysqli_close($this->dbConnection); 
+            return false;
+        }
+        $this->username = $_POST['username'];
+        $this->password = $_POST['password'];
+        if(!$this->regAuth())
+        {
+            mysqli_close($this->dbConnection); 
+            return false;
+        }
+        return true;
+    }
+    function regAuth(){
+        $regAuth_query="insert into users (username, password) 
+                        values ('$this->username', '$this->password');";
+        mysqli_query($this->dbConnection, $regAuth_query);
+        mysqli_close($this->dbConnection); 
+        return true;
+    }
+
     function login(){
         if (empty($_POST['username']))
         {
@@ -31,14 +74,18 @@ class User {
             //$this->HandleError("Please enter a password");
             return false;
         }
+        if (empty($_POST['extraPassword']))
+        {
+            //$this->HandleError("Please enter a password");
+            return false;
+        }
         $this->username = $_POST['username'];
         $this->password = $_POST['password'];
         if(!$this->auth())
         {
             return false;
         }
-        session_start();
-        $_SESSION[$this->GetLoginSessionVar()] = $this->username;
+
         return true;
     }
     //function HandleError($error) {

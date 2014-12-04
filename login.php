@@ -21,6 +21,7 @@ if(isset($_POST['submit'])){
 <label for="password">Password: </label>
 <input type='password' name='password' id='password' maxlength='20' /> <br />
 <input type='submit' name='submit' id='submit'value="submit" />
+<a href="register.php">sign up</a>
 </form>
 </body>
 </html>
