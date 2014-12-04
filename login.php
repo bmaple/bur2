@@ -3,7 +3,6 @@ require_once('User.php');
 session_start();
 $user = new User();
 if(isset($_POST['submit'])){
-    print $user->login();
     if($user->login()){
         $_SESSION['user'] = serialize($user);
         header("location:landing.php");

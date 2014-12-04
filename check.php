@@ -11,8 +11,14 @@ function isLoggedIn(){
         return $user;
     }
     else{
-            header("location:login.php");
-            exit;
+        header("location:login.php");
+        exit;
     }
+}
+function logout(){
+    unset($_SESSION[$user->GetLoginSessionVar()]);
+    unset($_SESSION['user']); 
+    header("location:login.php");
+    exit;
 }
 ?>
