@@ -31,11 +31,11 @@ class User {
             //$this->HandleError("Please enter a password");
             return false;
         }
-        if (empty($_POST['passCopy']) && $_POST('password') != $_POST['passCopy'])
-        {
+        //if (empty($_POST['passCopy']) && $_POST('password') !== $_POST['passCopy'])
+        //{
             //$this->HandleError("Please enter a password");
-            return false;
-        }
+            //return false;
+        //}
         $this->dbConnection = new mysqli(
             $this->mysql['host'], 
             $this->mysql['username'], 
@@ -53,6 +53,9 @@ class User {
             mysqli_close($this->dbConnection); 
             return false;
         }
+        session_start();
+        $_SESSION['user'] = serialize($this);
+        $_SESSION[$this->GetLoginSessionVar()] = $this->username;
         return true;
     }
     function regAuth(){
@@ -62,7 +65,6 @@ class User {
         mysqli_close($this->dbConnection); 
         return true;
     }
-
     function login(){
         if (empty($_POST['username']))
         {
@@ -74,23 +76,17 @@ class User {
             //$this->HandleError("Please enter a password");
             return false;
         }
-        if (empty($_POST['extraPassword']))
-        {
-            //$this->HandleError("Please enter a password");
-            return false;
-        }
         $this->username = $_POST['username'];
         $this->password = $_POST['password'];
         if(!$this->auth())
         {
             return false;
         }
-
+        session_start();
+        $_SESSION['user'] = serialize($this);
+        $_SESSION[$this->GetLoginSessionVar()] = $this->username;
         return true;
     }
-    //function HandleError($error) {
-    //$this->error_message    
-    //}
     function GetLoginSessionVar()
     {
         return md5($this->randSess);
