@@ -5,7 +5,7 @@ $user = new User();
 if(isset($_POST['submit'])){
     if($user->login()){
         $_SESSION['user'] = serialize($user);
-        header("location:landing.php");
+        header("location:index.php");
         exit;
     }
 }
