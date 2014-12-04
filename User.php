@@ -1,9 +1,10 @@
 <?php
 class User {
     var $username;
+    var $groupId;
     private $id;
     private $password;
-    private $dbConnection;
+    var $dbConnection;
     private $randSess = "aer23fwef";
     var $errors = array();
     var $mysql = array(  
@@ -35,11 +36,15 @@ class User {
             //$this->HandleError("Please enter a password");
             return false;
         }
-        //if (empty($_POST['passCopy']) && $_POST('password') !== $_POST['passCopy'])
-        //{
+        if (empty($_POST['passCopy']) && $_POST['password'] !== $_POST['passCopy'])
+        {
             //$this->HandleError("Please enter a password");
             //return false;
-        //}
+        }
+        if (empty($_POST['group'])){
+            //$this->HandleError("Please enter a password");
+            return false;
+        }
         $this->dbConnection = new mysqli(
             $this->mysql['host'], 
             $this->mysql['username'], 
@@ -52,14 +57,24 @@ class User {
         }
         $this->username = $_POST['username'];
         $this->password = $_POST['password'];
+        $this->groupId = $_POST['group'];
         if(!$this->regAuth())
         {
             mysqli_close($this->dbConnection); 
             return false;
         }
+        $group_insert = "INSERT INTO groupmembers (UserID, GroupID) VALUES('$this->getId()', '$this->groupId')";
+        mysqli_query($this->dbConnection, $group_insert);
+        if(!$result = mysqli_query($this->dbConnection, $group_insert)) {
+            print ("<p>Could not execute query</p>");
+                die(mysqli_error($this->dbConnection));    
+        }
         session_start();
         $id_query = "select UserID from users where username='$this->username';";
-        $result = mysqli_query($this->dbConnection, $id_query);
+        if(!$result = mysqli_query($this->dbConnection, $id_query)) {
+            //print ("<p>Could not execute query</p>");
+                //die(mysqli_error($this->dbConnection));    
+        }
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
         $this->id = $row["UserID"]; 
         mysqli_close($this->dbConnection); 
