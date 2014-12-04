@@ -15,7 +15,7 @@ function isLoggedIn(){
         exit;
     }
 }
-function logout(){
+function logout($user){
     unset($_SESSION[$user->GetLoginSessionVar()]);
     unset($_SESSION['user']); 
     header("location:login.php");
