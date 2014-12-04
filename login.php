@@ -15,6 +15,7 @@ if(isset($_POST['submit'])){
 <title> </title>
 </head>
 <body>
+<?php echo $user->getId() ?>
 <form id ='login' action='login.php' method='post' accept-charset='UTF-8'>
 <label for="username">Username: </label>
 <input type='text' name='username' id='username' maxlength='20' /> <br />

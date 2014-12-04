@@ -1,6 +1,7 @@
 <?php
 class User {
     var $username;
+    private $id;
     private $password;
     private $dbConnection;
     private $randSess = "aer23fwef";
@@ -11,6 +12,9 @@ class User {
         'database' => 'Bureaucrat',
         'username' => 'bmaple',
         'password' => 'security');
+    function getId(){
+        return $this->id;
+    }
     function RedirectToURL(){
         header("location: $url");
     }
@@ -54,6 +58,11 @@ class User {
             return false;
         }
         session_start();
+        $id_query = "select UserID from users where username='$this->username';";
+        $result = mysqli_query($this->dbConnection, $id_query);
+        $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+        $this->id = $row["UserID"]; 
+        mysqli_close($this->dbConnection); 
         $_SESSION['user'] = serialize($this);
         $_SESSION[$this->GetLoginSessionVar()] = $this->username;
         return true;
@@ -62,7 +71,6 @@ class User {
         $regAuth_query="insert into users (username, password) 
                         values ('$this->username', '$this->password');";
         mysqli_query($this->dbConnection, $regAuth_query);
-        mysqli_close($this->dbConnection); 
         return true;
     }
     function login(){
@@ -82,7 +90,12 @@ class User {
         {
             return false;
         }
-        session_start();
+        //session_start();
+        $id_query = "select UserID from users where username='$this->username';";
+        $result = mysqli_query($this->dbConnection, $id_query);
+        $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+        $this->id = $row["UserID"]; 
+        mysqli_close($this->dbConnection); 
         $_SESSION['user'] = serialize($this);
         $_SESSION[$this->GetLoginSessionVar()] = $this->username;
         return true;
@@ -105,7 +118,7 @@ class User {
         $result = mysqli_query($this->dbConnection, $auth_query);
         $row = mysqli_fetch_row($result);
         echo $row[0];
-        mysqli_close($this->dbConnection); 
+        //mysqli_close($this->dbConnection); 
         if($this->password == $row[0])
             return true;
         return false;
