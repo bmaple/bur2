@@ -24,23 +24,4 @@ if(isset($_POST['submit'])){
 <input type='password' name='password' id='password' maxlength='20' /> <br />
 <label for="passCopy">Password: </label>
 <input type='password' name='passCopy' id='passCopy' maxlength='20' /> <br />
-<label for="group">group: </label>
-<?php
-
-echo "<select name ='group'>";
-$user->dbConnection = new mysqli(          
-    $user->mysql['host'],                  
-    $user->mysql['username'],              
-    $user->mysql['password'],              
-    $user->mysql['database'],              
-    $user->mysql['port']);                 
-$group_query = "select * from groups";
-$result = mysqli_query($user->dbConnection, $group_query);
-while( $row = mysqli_fetch_assoc($result)){
-    echo "\n<option value ='{$row['GroupID']}'>\n";
-        echo"{$row['GroupName']}\n";
-        echo "</option>\n";
-}
-mysqli_close($user->dbConnection);
-echo"</select><br />\n<input type='submit' name='submit' id='submit'value='submit' /> </form> </body> </html>";
-?>
+<input type='submit' name='submit' id='submit'value='submit' /> </form> </body> </html>"
