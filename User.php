@@ -8,11 +8,11 @@ class User {
     private $randSess = "aer23fwef";
     var $errors = array();
     var $mysql = array(  
-        'host' => 'localhost',
-        //'port' => '3306',
+        'host' => 'bur.ccg2fbosv7le.us-west-2.rds.amazonaws.com',
+        'port' => '3306',
         'database' => 'Bureaucrat',
-        'username' => 'root',
-        'password' => '');
+        'username' => 'bmaple',
+        'password' => 'security');
     function getId(){
         return $this->id;
     }
@@ -25,16 +25,19 @@ class User {
             return false;
         return true;
     }
-    function manage(){
-        if (empty($_POST['group'])){
-            //$this->HandleError("Please enter a password");
-            return false;
-            $this->dbConnection = new mysqli(
+    function startNewSqli(){
+             $this->dbConnection = new mysqli(
                 $this->mysql['host'], 
                 $this->mysql['username'], 
                 $this->mysql['password'], 
                 $this->mysql['database'], 
-                $this->mysql['port']);                      
+                $this->mysql['port']); 
+    }
+    function manage(){
+        if (empty($_POST['group'])){
+            //$this->HandleError("Please enter a password");
+            return false;
+            $this->startNewSqli();
             if($this->dbConnection->connect_errno){
                 mysqli_close($this->dbConnection); 
                 return false;

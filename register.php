@@ -24,4 +24,4 @@ if(isset($_POST['submit'])){
 <input type='password' name='password' id='password' maxlength='20' /> <br />
 <label for="passCopy">Password: </label>
 <input type='password' name='passCopy' id='passCopy' maxlength='20' /> <br />
-<input type='submit' name='submit' id='submit'value='submit' /> </form> </body> </html>"
+<input type='submit' name='submit' id='submit'value='submit' /> </form> </body> </html>
