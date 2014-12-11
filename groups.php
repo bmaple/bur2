@@ -1,8 +1,7 @@
 <?php
+//require_once('User.php');
+//require_once('check.php');
 require_once('header.php');
-require_once('User.php');
-require_once('check.php');
-
 //$user = isLoggedIn();
 if(!$user->isAdmin()){
     header("location:index.php");
@@ -17,9 +16,11 @@ if(isset($_POST['submit'])){
 }    
 ?>
 
+
+<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="active">
+                    <li>
                         <a href="files.php"><i class="fa fa-fw fa-file"></i> Your Files</a>
                     </li>
                     <li>
@@ -28,8 +29,8 @@ if(isset($_POST['submit'])){
                     
                     <?php
                     if($user->isAdmin()) {
-                        echo "<li> <a href='manage.php'><i class='fa fa-fw fa-wrench'></i> Manage Groups and users</a> </li>";
-                        echo "<li> <a href='groups.php'><i class='fa fa-fw fa-wrench'></i> Create a new group</a> </li>";
+                        echo "<li> <a href='manage.php'><i class='fa fa-fw fa-wrench'></i> Manage Groups and Users</a> </li>";
+                        echo "<li class='active'> <a href='groups.php'><i class='fa fa-fw fa-plus'></i> Create a New Group</a> </li>";
                     }
                     ?>
                     <!--<li>
@@ -39,25 +40,41 @@ if(isset($_POST['submit'])){
             </div>
             <!-- /.navbar-collapse -->
         </nav>
+
         <div id="page-wrapper">
 
-            <form id ='groupForm' action='groups.php' method='post' accept-charset='UTF-8'>
             <div class="container-fluid">
 
                 <div class="row">
-                    <label for='groupName'>New Group Name</label>
-                    <input type='text' name='groupName' id='groupName' />
-                    <input type='submit' name='submit' id='submit'value='submit' />
+                	<div class="col-lg-4"></div>
+                    <div class="col-lg-4">
+                    	<h1>Create a New Group</h1>
+						<form id ='groupForm' action='groups.php' method='post' accept-charset='UTF-8'>
+						<label for='groupName'>New Group Name: </label>
+						<input type='text' name='groupName' id='groupName' maxlength='20' /><br />
+						<input type='submit' name='submit' id='submit'value='Submit' />
+						</form>
+
+                    </div>
+                    
                 </div>
                 <!-- /.row -->
 
             </div>
             <!-- /.container-fluid -->
 
-        </form>
         </div>
         <!-- /#page-wrapper -->
 
     </div>
-</body> 
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="theme/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="theme/js/bootstrap.min.js"></script>
+
+</body>
+
 </html>

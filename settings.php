@@ -1,5 +1,13 @@
 <?php
 require_once('header.php');
+
+$update_query = "UPDATE users SET Username='$username' WHERE StudentID='$sID'";
+if ( !($result = mysqli_query( $database, $update_query ) ) )
+{
+    print( "<p>Could not execute query!</p>" );
+    die( mysqli_error($database) );
+}
+
 ?>
 
 
@@ -37,12 +45,12 @@ require_once('header.php');
 
                             <div class="form-group">
                                 <label>Update Username</label>
-                                <input class="form-control">
+                                <input class="form-control" maxlength='64'>
                             </div>
                             
                             <div class="form-group">
                                 <label>Update Password</label>
-                                <input class="form-control">
+                                <input class="form-control" maxlength='64'>
                             </div>
 
                             <button type="submit" class="btn btn-default">Apply Changes</button>
