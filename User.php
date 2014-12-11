@@ -8,11 +8,19 @@ class User {
     private $randSess = "aer23fwef";
     var $errors = array();
     var $mysql = array(  
-        'host' => 'localhost',
-        //'port' => '3306',
+        'host' => 'bur.ccg2fbosv7le.us-west-2.rds.amazonaws.com',
+        'port' => '3306',
         'database' => 'Bureaucrat',
-        'username' => 'root',
-        'password' => '');
+        'username' => 'bmaple',
+        'password' => 'security');
+    function openDbConnection(){
+        $this->dbConnection = new mysqli(
+            $this->mysql['host'], 
+            $this->mysql['username'], 
+            $this->mysql['password'], 
+            $this->mysql['database'], 
+            $this->mysql['port']);    
+    }
     function getId(){
         return $this->id;
     }
@@ -26,27 +34,23 @@ class User {
         return true;
     }
     function manage(){
-        if (empty($_POST['group'])){
+        if (empty($_POST['user'])){
             //$this->HandleError("Please enter a password");
             return false;
-            $this->dbConnection = new mysqli(
-                $this->mysql['host'], 
-                $this->mysql['username'], 
-                $this->mysql['password'], 
-                $this->mysql['database'], 
-                $this->mysql['port']);                      
-            if($this->dbConnection->connect_errno){
-                mysqli_close($this->dbConnection); 
-                return false;
-            }
-            $this->groupId = $_POST['group'];
-            $group_insert = "INSERT INTO groupmembers (UserID, GroupID) VALUES('$this->getId()', '$this->groupId')";
-            mysqli_query($this->dbConnection, $group_insert);
-            if(!$result = mysqli_query($this->dbConnection, $group_insert)) {
-                print ("<p>Could not execute query</p>");
-                die(mysqli_error($this->dbConnection));    
-            }
         }
+
+        $this->openDbConnection();
+        if($this->dbConnection->connect_errno){
+            mysqli_close($this->dbConnection); 
+            return false;
+        }
+        $group_insert = "INSERT INTO groupmembers (UserID, GroupID) VALUES('{$_POST['user']}', '{$_POST['group']}')";
+        mysqli_query($this->dbConnection, $group_insert);
+        if(!$result = mysqli_query($this->dbConnection, $group_insert)) {
+            print ("<p>Could not execute query</p>");
+            die(mysqli_error($this->dbConnection));    
+        }
+
     }
     function register(){
         if (empty($_POST['username']))
@@ -64,12 +68,7 @@ class User {
             //$this->HandleError("Please enter a password");
             //return false;
         }
-        $this->dbConnection = new mysqli(
-            $this->mysql['host'], 
-            $this->mysql['username'], 
-            $this->mysql['password'], 
-            $this->mysql['database'], 
-            $this->mysql['port']);                      
+        $this->openDbConnection();
         if($this->dbConnection->connect_errno){
             mysqli_close($this->dbConnection); 
             return false;
@@ -132,12 +131,7 @@ class User {
         return md5($this->randSess);
     }
     function auth(){
-        $this->dbConnection = new mysqli(
-            $this->mysql['host'], 
-            $this->mysql['username'], 
-            $this->mysql['password'], 
-            $this->mysql['database'], 
-            $this->mysql['port']);                      
+        $this->openDbConnection();
         if($this->dbConnection->connect_errno){
             return false;
         }
