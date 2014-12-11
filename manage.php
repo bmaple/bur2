@@ -30,6 +30,7 @@ while( $row = mysqli_fetch_assoc($result)){
 }
 echo "</select><br />";
 $result = mysqli_query($user->dbConnection, $group_query);
+echo "<label for='group'>select a group </label>";
 echo "<select name='group' id='group'>";
 echo "<option value='null'>No group</option>";
 while( $row = mysqli_fetch_assoc($result)){
@@ -43,6 +44,7 @@ mysqli_close($user->dbConnection);
 <input type='checkbox' name='chGroup' id='chGroup' value='chGroup' /> 
 <label for="chGroup">Verify change of group</label>
 <br/>
+<label for="promote">Promote user to admin</label>
 <input type='checkbox' name='promote' id='promote' value='promote' /><br/>
 <input type='submit' name='submit' id='submit'value='submit' />
 </form>

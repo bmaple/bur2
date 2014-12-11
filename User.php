@@ -43,13 +43,23 @@ class User {
             mysqli_close($this->dbConnection); 
             return false;
         }
-        $group_insert = "INSERT INTO groupmembers (UserID, GroupID) VALUES('{$_POST['user']}', '{$_POST['group']}')";
-        mysqli_query($this->dbConnection, $group_insert);
-        if(!$result = mysqli_query($this->dbConnection, $group_insert)) {
-            print ("<p>Could not execute query</p>");
-            die(mysqli_error($this->dbConnection));    
+        if(isset($_POST['chGroup'])){
+            $group_insert = "INSERT INTO groupmembers (UserID, GroupID) VALUES('{$_POST['user']}', '{$_POST['group']}')";
+            mysqli_query($this->dbConnection, $group_insert);
+            if(!$result = mysqli_query($this->dbConnection, $group_insert)) {
+                print ("<p>Could not execute query</p>");
+                die(mysqli_error($this->dbConnection));    
+            }
         }
-
+        if(isset($_POST['promote'])){
+            $promote_query = "update users set UserLevel='admin' where UserID='{$_POST['user']}'";
+            if(!$result = mysqli_query($this->dbConnection, $promote_query)) {
+                print ("<p>Could not execute query</p>");
+                die(mysqli_error($this->dbConnection));    
+            }
+        }
+        mysqli_close($this->dbConnection); 
+        return true;
     }
     function register(){
         if (empty($_POST['username']))
