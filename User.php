@@ -45,7 +45,7 @@ class User {
         }
         if(isset($_POST['chGroup'])){
             $group_insert = "INSERT INTO groupmembers (UserID, GroupID) VALUES('{$_POST['user']}', '{$_POST['group']}')";
-            mysqli_query($this->dbConnection, $group_insert);
+//            mysqli_query($this->dbConnection, $group_insert);
             if(!$result = mysqli_query($this->dbConnection, $group_insert)) {
                 print ("<p>Could not execute query</p>");
                 die(mysqli_error($this->dbConnection));    

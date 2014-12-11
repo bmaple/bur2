@@ -8,7 +8,7 @@ if(isset($_POST['submit'])){
         header("location:manage.php");
         exit;
     }
-}
+}    //NEED TO HAVE AN ADD GROUP FUNCTION
 ?>
 <html>
 <head>
@@ -32,7 +32,7 @@ echo "</select><br />";
 $result = mysqli_query($user->dbConnection, $group_query);
 echo "<label for='group'>select a group </label>";
 echo "<select name='group' id='group'>";
-echo "<option value='null'>No group</option>";
+echo "<option >No group</option>";
 while( $row = mysqli_fetch_assoc($result)){
     echo "\n<option value ='{$row['GroupID']}'>\n";
     echo"{$row['GroupName']}\n";
