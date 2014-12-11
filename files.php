@@ -61,10 +61,10 @@ require_once('check.php');
                     </li>
                     
                     <?php
-    if($user->isAdmin()) {
-                    echo "<li> <a href='manage.php'><i class='fa fa-fw fa-wrench'></i> Manage Groups and users</a> </li>";
-                    echo "<li> <a href='groups.php'><i class='fa fa-fw fa-wrench'></i> Create a new group</a> </li>";
-    }
+                    if($user->isAdmin()) {
+                        echo "<li> <a href='manage.php'><i class='fa fa-fw fa-wrench'></i> Manage Groups and users</a> </li>";
+                        echo "<li> <a href='groups.php'><i class='fa fa-fw fa-wrench'></i> Create a new group</a> </li>";
+                    }
                     ?>
                     <!--<li>
                         <a href="search.php"><i class="fa fa-fw fa-search"></i> Search Files</a>
