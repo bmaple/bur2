@@ -3,7 +3,7 @@ require_once('header.php');
 require_once('User.php');
 require_once('check.php');
 
-$user = isLoggedIn();
+//$user = isLoggedIn();
 if(!$user->isAdmin()){
     header("location:index.php");
     exit;

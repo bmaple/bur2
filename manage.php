@@ -1,6 +1,6 @@
 <?php
 require_once('header.php');
-$user = isLoggedIn();
+//$user = isLoggedIn();
 if(!$user->isAdmin()){
     header("location:index.php");
     exit;

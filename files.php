@@ -2,7 +2,7 @@
 require_once('header.php');
 require_once('check.php');
 
-	$user = isLoggedIn();
+//	$user = isLoggedIn();
     $userID = $user->getId();
 	
 	// Create DB connection
