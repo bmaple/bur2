@@ -37,12 +37,12 @@ require_once('header.php');
 
                             <div class="form-group">
                                 <label>Update Username</label>
-                                <input class="form-control">
+                                <input class="form-control" maxlength='64'>
                             </div>
                             
                             <div class="form-group">
                                 <label>Update Password</label>
-                                <input class="form-control">
+                                <input class="form-control" maxlength='64'>
                             </div>
 
                             <button type="submit" class="btn btn-default">Apply Changes</button>

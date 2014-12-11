@@ -1,6 +1,6 @@
 <?php
 require_once('header.php');
-require_once('check.php');
+//require_once('check.php');
 
 	$user = isLoggedIn();
     $userID = $user->getId();
@@ -33,10 +33,19 @@ require_once('check.php');
                    $stmt3->bind_result($approveFileID);
                 }
 
-					$my_files .= "<ul><li>Author: " . $displayName . "</li>" .
-								  "<li>File Name: " . $filename . "</li>" .
-								  "<li>Upload Date: " . $uploadDate . "</li>
-                                   <li><a download href='" . $filePath . "'>Download File</a></li></ul>";
+                            $my_files .= "    <table class='table table-hover table-striped'>
+                                                            <tr>
+                                                                <td>File Name: </td>
+                                                                <td><a download href=" . $filePath . ">" . $filename . "</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Author: </td>
+                                                                <td>" . $displayName . "</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Upload Date: </td>
+                                                                <td>" . $uploadDate . "</td>
+                                                            </tr>";
                     if($fileID == $approvedFileID) {
                         $my_files .= "<form><select name='choice'>
                                              <option value='' selected='selected'></option>
@@ -62,8 +71,8 @@ require_once('check.php');
                     
                     <?php
                     if($user->isAdmin()) {
-                        echo "<li> <a href='manage.php'><i class='fa fa-fw fa-wrench'></i> Manage Groups and users</a> </li>";
-                        echo "<li> <a href='groups.php'><i class='fa fa-fw fa-wrench'></i> Create a new group</a> </li>";
+                        echo "<li> <a href='manage.php'><i class='fa fa-fw fa-wrench'></i> Manage Groups and Users</a> </li>";
+                        echo "<li> <a href='groups.php'><i class='fa fa-fw fa-wrench'></i> Create a New Group</a> </li>";
                     }
                     ?>
                     <!--<li>
@@ -79,7 +88,7 @@ require_once('check.php');
             <div class="container-fluid">
 
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-3">
 						<?php print $my_files ?>
 
                     </div>

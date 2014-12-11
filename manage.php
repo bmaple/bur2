@@ -25,8 +25,8 @@ if(isset($_POST['submit'])){
         </li>
         <?php
         if($user->isAdmin()) {
-            echo "<li> <a href='manage.php'><i class='fa fa-fw fa-wrench'></i> Manage Groups and users</a> </li>";
-            echo "<li> <a href='groups.php'><i class='fa fa-fw fa-wrench'></i> Create a new group</a> </li>";
+            echo "<li class='active'> <a href='manage.php'><i class='fa fa-fw fa-wrench'></i> Manage Groups and Users</a> </li>";
+            echo "<li> <a href='groups.php'><i class='fa fa-fw fa-wrench'></i> Create a New Group</a> </li>";
         }
         ?>
         <!--<li>
@@ -46,7 +46,9 @@ $result = mysqli_query($user->dbConnection, $user_query);
 ?>
 <form id ='register' action='manage.php' method='post' accept-charset='UTF-8'>
     <div class="container-fluid">
-
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <h1>Manage Groups and Users</h1>
         <div class="row">
 <?php
 $group_query = "select * from groups";
@@ -58,8 +60,8 @@ $result = mysqli_query($user->dbConnection, $user_query);
         <!-- /.row -->
         <div class="row">
 <?php
-echo "<label for='user'>Select a user to modify</label>\n
-    <select name='user' id='user'>";
+echo "<label for='user'>Select a User to Modify</label>\n
+    <select class='form-control' name='user' id='user'>";
 while( $row = mysqli_fetch_assoc($result)){
     echo "<option value ='{$row['UserID']}'>";
     echo"{$row['UserID']} - {$row['Username']}";
@@ -73,33 +75,37 @@ echo "</select><br />";
         <div class="row">
 <?php
 $result = mysqli_query($user->dbConnection, $group_query);
-echo "<label for='group'>select a group </label>";
-echo "<select name='group' id='group'>";
-echo "<option >No group</option>";
+echo "<label for='group'>Select a Group </label>";
+echo "<select class='form-control' name='group' id='group'>";
+echo "<option >No Group</option>";
 while( $row = mysqli_fetch_assoc($result)){
     echo "\n<option value ='{$row['GroupID']}'>\n";
     echo"{$row['GroupName']}\n";
     echo "</option>\n";
 }
-echo"</select>";
+echo"</select><br>";
 mysqli_close($user->dbConnection);
 ?>
         </div>
         <!-- /.row -->
         <div class="row">
-            <input type='checkbox' name='chGroup' id='chGroup' value='chGroup' /> 
-            <label for="chGroup">Verify change of group</label> <br/>
+            <label for="promote">Promote User to Admin</label>
+            <input type='checkbox' name='promote' id='promote' class="checkbox-inline" value='promote' /><br/>
         </div>
         <!-- /.row -->
         <div class="row">
-            <label for="promote">Promote user to admin</label>
-            <input type='checkbox' name='promote' id='promote' value='promote' /><br/>
+            <label for="chGroup">Verify Change of Group</label>
+            <input type='checkbox' name='chGroup' id='chGroup' class="checkbox-inline" value='chGroup' /> 
+             <br/>
         </div>
+        
+        
         <!-- /.row -->
         <div class="row">
-            <input type='submit' name='submit' id='submit'value='submit' />
+            <input type='submit' name='submit' id='submit' value='Submit' />
         </div>
         <!-- /.row -->
+        </div>
     </div>
     <!-- /.container-fluid -->
 </form>

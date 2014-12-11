@@ -20,8 +20,8 @@ if(isset($_GET['file_id'])) {
                     </li>
                     <?php
                     if($user->isAdmin()) {
-                        echo "<li> <a href='manage.php'><i class='fa fa-fw fa-wrench'></i> Manage Groups and users</a> </li>";
-                        echo "<li> <a href='groups.php'><i class='fa fa-fw fa-wrench'></i> Create a new group</a> </li>";
+                        echo "<li> <a href='manage.php'><i class='fa fa-fw fa-wrench'></i> Manage Groups and Users</a> </li>";
+                        echo "<li> <a href='groups.php'><i class='fa fa-fw fa-wrench'></i> Create a New Group</a> </li>";
                     }
                     ?>
                     <!--<li>
@@ -37,8 +37,9 @@ if(isset($_GET['file_id'])) {
             <div class="container-fluid">
 
                 <div class="row">
-                    <div class="col-lg-6">
-
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4">
+                        <h1>Upload Files</h1>
                         <form enctype="multipart/form-data" role="form" method="POST" action="uploader.php">
 
                             <div class="form-group">
