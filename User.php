@@ -2,6 +2,7 @@
 class User {
     var $username;
     var $groupId;
+    private $priv;
     private $id;
     private $password;
     var $dbConnection;
@@ -80,18 +81,15 @@ class User {
         return true;
     }
     function register(){
-        if (empty($_POST['username']))
-        {
+        if (empty($_POST['username'])) {
             //$this->HandleError("Please enter a username");
             return false;
         }
-        if (empty($_POST['password']))
-        {
+        if (empty($_POST['password'])) {
             //$this->HandleError("Please enter a password");
             return false;
         }
-        if (empty($_POST['passCopy']) && $_POST['password'] !== $_POST['passCopy'])
-        {
+        if (empty($_POST['passCopy']) && $_POST['password'] !== $_POST['passCopy']) {
             //$this->HandleError("Please enter a password");
             //return false;
         }
@@ -102,8 +100,7 @@ class User {
         }
         $this->username = $_POST['username'];
         $this->password = $_POST['password'];
-        if(!$this->regAuth())
-        {
+        if(!$this->regAuth()) {
             mysqli_close($this->dbConnection); 
             return false;
         }
@@ -127,34 +124,36 @@ class User {
         return true;
     }
     function login(){
-        if (empty($_POST['username']))
-        {
+        if (empty($_POST['username'])) {
             //$this->HandleError("Please enter a username");
             return false;
         }
-        if (empty($_POST['password']))
-        {
+        if (empty($_POST['password'])) {
             //$this->HandleError("Please enter a password");
             return false;
         }
         $this->username = $_POST['username'];
         $this->password = $_POST['password'];
-        if(!$this->auth())
-        {
+        if(!$this->auth()) {
             return false;
         }
         //session_start();
-        $id_query = "select UserID from users where username='$this->username';";
+        $id_query = "select UserID, UserLevel from users where username='$this->username';";
         $result = mysqli_query($this->dbConnection, $id_query);
-        $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-        $this->id = $row["UserID"]; 
+        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+        $this->id = $row["UserID"];
+        $this->priv = $row["UserLevel"]; 
         mysqli_close($this->dbConnection); 
         $_SESSION['user'] = serialize($this);
         $_SESSION[$this->GetLoginSessionVar()] = $this->username;
         return true;
     }
-    function GetLoginSessionVar()
-    {
+    function isAdmin(){
+        if( $this->priv == "admin")
+            return true;
+        else false;
+    }
+    function GetLoginSessionVar() {
         return md5($this->randSess);
     }
     function auth(){
