@@ -15,7 +15,7 @@ if(isset($_POST['submit'])){
 <title>Register</title>
 </head>
 <body>
-<form id ='register' action='register.php' method='post' accept-charset='UTF-8'>
+<form id ='register' action='manage.php' method='post' accept-charset='UTF-8'>
 <?php
 $group_query = "select * from groups";
 $user_query = "select UserID, Username from users";

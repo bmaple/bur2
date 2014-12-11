@@ -34,11 +34,10 @@ class User {
         return true;
     }
     function manage(){
-        if (empty($_POST['user'])){
+        if (empty($_POST['group'])){
             //$this->HandleError("Please enter a password");
             return false;
         }
-
         $this->openDbConnection();
         if($this->dbConnection->connect_errno){
             mysqli_close($this->dbConnection); 
