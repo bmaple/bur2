@@ -46,7 +46,7 @@ if(isset($_POST['submit'])){
             <div class="container-fluid">
 
                 <div class="row">
-                	<div class="col-lg-5"></div>
+                	<div class="col-lg-4"></div>
                     <div class="col-lg-4">
                     	<h1>Create a New Group</h1>
 						<form id ='groupForm' action='groups.php' method='post' accept-charset='UTF-8'>

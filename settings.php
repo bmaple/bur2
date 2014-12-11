@@ -1,5 +1,13 @@
 <?php
 require_once('header.php');
+
+$update_query = "UPDATE users SET Username='$username' WHERE StudentID='$sID'";
+if ( !($result = mysqli_query( $database, $update_query ) ) )
+{
+    print( "<p>Could not execute query!</p>" );
+    die( mysqli_error($database) );
+}
+
 ?>
 
 

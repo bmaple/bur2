@@ -209,22 +209,22 @@ require_once('check.php');
         }*/
     }
 ?>
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+                <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
                         <a href="files.php"><i class="fa fa-fw fa-file"></i> Your Files</a>
                     </li>
                     <li>
-                        <a href='managefiles.php'><i class= "fa fa-fw fa-file"></i> Manage Files</a>
-                    </li>
-                    <li>
                         <a href="upload.php"><i class="fa fa-fw fa-edit"></i> Upload Files</a>
                     </li>
+                    <?php
+                    if($user->isAdmin()) {
+                        echo "<li> <a href='manage.php'><i class='fa fa-fw fa-wrench'></i> Manage Groups and Users</a> </li>";
+                        echo "<li> <a href='groups.php'><i class='fa fa-fw fa-plus'></i> Create a New Group</a> </li>";
+                    }
+                    ?>
                     <!--<li>
-                        <a href="manage.php"><i class="fa fa-fw fa-wrench"></i> Manage Files and Groups</a>
-                    </li>
-                    <li>
                         <a href="search.php"><i class="fa fa-fw fa-search"></i> Search Files</a>
                     </li>-->
                 </ul>

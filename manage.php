@@ -26,7 +26,7 @@ if(isset($_POST['submit'])){
         <?php
         if($user->isAdmin()) {
             echo "<li class='active'> <a href='manage.php'><i class='fa fa-fw fa-wrench'></i> Manage Groups and Users</a> </li>";
-            echo "<li> <a href='groups.php'><i class='fa fa-fw fa-wrench'></i> Create a New Group</a> </li>";
+            echo "<li> <a href='groups.php'><i class='fa fa-fw fa-plus'></i> Create a New Group</a> </li>";
         }
         ?>
         <!--<li>
@@ -46,8 +46,8 @@ $result = mysqli_query($user->dbConnection, $user_query);
 ?>
 <form id ='register' action='manage.php' method='post' accept-charset='UTF-8'>
     <div class="container-fluid">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
             <h1>Manage Groups and Users</h1>
         <div class="row">
 <?php

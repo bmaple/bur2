@@ -21,7 +21,7 @@ if(isset($_GET['file_id'])) {
                     <?php
                     if($user->isAdmin()) {
                         echo "<li> <a href='manage.php'><i class='fa fa-fw fa-wrench'></i> Manage Groups and Users</a> </li>";
-                        echo "<li> <a href='groups.php'><i class='fa fa-fw fa-wrench'></i> Create a New Group</a> </li>";
+                        echo "<li> <a href='groups.php'><i class='fa fa-fw fa-plus'></i> Create a New Group</a> </li>";
                     }
                     ?>
                     <!--<li>
