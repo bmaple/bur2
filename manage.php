@@ -29,9 +29,9 @@ if(isset($_POST['submit'])){
             echo "<li> <a href='groups.php'><i class='fa fa-fw fa-plus'></i> Create a New Group</a> </li>";
         }
         ?>
-        <!--<li>
-        <a href="search.php"><i class="fa fa-fw fa-search"></i> Search Files</a>
-        </li>-->
+        <li>
+            <a href="managefiles.php"><i class="fa fa-fw fa-edit"></i> Manage Files</a>
+        </li>
     </ul>
 </div>
 <!-- /.navbar-collapse -->

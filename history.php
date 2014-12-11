@@ -1,8 +1,6 @@
 <?php
 require_once('header.php');
 require_once('check.php');
-
-	$user = isLoggedIn();
     $userID = $user->getId();
 	
 	// Create DB connection
@@ -51,13 +49,36 @@ require_once('check.php');
             $stmt->bind_result($displayName, $filename, $uploadDate, $versionNumber, $modifiedDate, $fileID, $filePath, $approvalStatus);
 
             while($stmt->fetch()) {
-                $currentFile .= "<div class='file_information'><ul><li>Author: " . $displayName . "</li>" .
-                                              "<li>File Name: " . $filename . "</li>" .
-                                              "<li>Version: " . $versionNumber . " (CURRENT)</li>" .
-                                              "<li>Upload Date: " . $uploadDate . "</li>" . 
-                                              "<li>Modified Date: " . $modifiedDate . "</li>" .
-                                              "<li>Approval Status: " . $approvalStatus . "</li>" . 
-                                              "<li><a download href='" . $filePath . "'>Download File</a></li></ul></div>";
+                $currentFile .= "<table class='table table-hover table-striped'>
+                                    <tr>
+                                        <td>File Name: </td>
+                                        <td><a download href=" . $filePath . ">" . $filename . "</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Author: </td>
+                                        <td>" . $displayName . "</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Version: </td>
+                                        <td>" . $versionNumber . "</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Upload Date: </td>
+                                        <td>" . $uploadDate . "</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Modified Date: </td>
+                                        <td>" . $modifiedDate . "</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Approval Status:  </td>
+                                        <td>" . $approvalStatus . "</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Upload Date: </td>
+                                        <td>" . $uploadDate . "</td>
+                                    </tr>
+                                    </table>";
             }
         }
 
@@ -68,13 +89,36 @@ require_once('check.php');
             $stmt->bind_result($displayName, $filename, $uploadDate, $versionNumber, $modifiedDate, $fileID, $filePath, $approvalStatus);
 
             while($stmt->fetch()) {
-                $currentFile .= "<div class='file_information'><ul><li>Author: " . $displayName . "</li>" .
-                                              "<li>File Name: " . $filename . "</li>" .
-                                              "<li>Version: " . $versionNumber . "</li>" .
-                                              "<li>Upload Date: " . $uploadDate . "</li>" . 
-                                              "<li>Modified Date: " . $modifiedDate . "</li>" .
-                                              "<li>Approval Status: " . $approvalStatus . "</li>" . 
-                                              "<li><a download href='" . $filePath . "'>Download File</a></li></ul></div>";
+                $currentFile .= "<table class='table table-hover table-striped'>
+                                    <tr>
+                                        <td>File Name: </td>
+                                        <td><a download href=" . $filePath . ">" . $filename . "</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Author: </td>
+                                        <td>" . $displayName . "</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Version: </td>
+                                        <td>" . $versionNumber . "</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Upload Date: </td>
+                                        <td>" . $uploadDate . "</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Modified Date: </td>
+                                        <td>" . $modifiedDate . "</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Approval Status:  </td>
+                                        <td>" . $approvalStatus . "</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Upload Date: </td>
+                                        <td>" . $uploadDate . "</td>
+                                    </tr>
+                                    </table>";
             }
         }
     }
@@ -82,21 +126,21 @@ require_once('check.php');
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="active">
-                        <a href="files.php"><i class="fa fa-fw fa-file"></i> Your Files</a>
-                    </li>
                     <li>
-                        <a href='managefiles.php'><i class= "fa fa-fw fa-file"></i> Manage Files</a>
+                        <a href="files.php"><i class="fa fa-fw fa-file"></i> Your Files</a>
                     </li>
                     <li>
                         <a href="upload.php"><i class="fa fa-fw fa-edit"></i> Upload Files</a>
                     </li>
-                    <!--<li>
-                        <a href="manage.php"><i class="fa fa-fw fa-wrench"></i> Manage Files and Groups</a>
-                    </li>
+                    <?php
+                    if($user->isAdmin()) {
+                        echo "<li> <a href='manage.php'><i class='fa fa-fw fa-wrench'></i> Manage Groups and Users</a> </li>";
+                        echo "<li> <a href='groups.php'><i class='fa fa-fw fa-plus'></i> Create a New Group</a> </li>";
+                    }
+                    ?>
                     <li>
-                        <a href="search.php"><i class="fa fa-fw fa-search"></i> Search Files</a>
-                    </li>-->
+                        <a href="managefiles.php"><i class="fa fa-fw fa-edit"></i> Manage Files</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
