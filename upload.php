@@ -1,5 +1,12 @@
 <?php
 require_once('header.php');
+
+if(isset($_GET['file_id'])) {
+	$file_id = $_GET['file_id'];
+}else{
+	$file_id = '';
+}
+
 ?>
 
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
@@ -34,6 +41,7 @@ require_once('header.php');
                             <div class="form-group">
                                 <label>File input</label>
                                 <input type="file" name="uploadedfile">
+								<input type="hidden" name="file_id" value="<?php print $file_id ?>">
                             </div>
 
                             <div class="form-group">
