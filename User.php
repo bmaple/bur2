@@ -33,6 +33,24 @@ class User {
             return false;
         return true;
     }
+    function addGroup(){
+        if(empty($_POST['groupName'])){
+            return false;
+        }
+        $this->openDbConnection();
+        if($this->dbConnection->connect_errno){
+            mysqli_close($this->dbConnection); 
+            return false;
+        }
+        if(isset($_POST['groupName'])){
+            $group_insert = "INSERT INTO groups (GroupName) VALUES('{$_POST['groupName']}')";
+            if(!$result = mysqli_query($this->dbConnection, $group_insert)) {
+                print ("<p>Could not execute query</p>");
+                die(mysqli_error($this->dbConnection));    
+            }
+        }
+        return true;
+    }
     function manage(){
         if (empty($_POST['group'])){
             //$this->HandleError("Please enter a password");
@@ -45,7 +63,7 @@ class User {
         }
         if(isset($_POST['chGroup'])){
             $group_insert = "INSERT INTO groupmembers (UserID, GroupID) VALUES('{$_POST['user']}', '{$_POST['group']}')";
-//            mysqli_query($this->dbConnection, $group_insert);
+            //            mysqli_query($this->dbConnection, $group_insert);
             if(!$result = mysqli_query($this->dbConnection, $group_insert)) {
                 print ("<p>Could not execute query</p>");
                 die(mysqli_error($this->dbConnection));    
