@@ -16,6 +16,7 @@ require_once('header.php');
 	$fileID = '';
 	$filePath = '';
 	$approvedFileID = '';
+	$modifiedDate = '';
     $approvalStatus = '';
     $approvalId = '';
     $selectedStatus = '';
@@ -107,11 +108,11 @@ require_once('header.php');
             $stmt4->store_result();
             $stmt4->bind_result($approveFileID, $selectedStatus);
             while($stmt4->fetch()) {
-                if($stmt5 = $conn->prepare("SELECT users.Username, file.Filename, file.UploadDate, file.VersionNumber, file.FileID, file.Filepath, file.ApprovalStatus FROM file LEFT JOIN (users) ON (file.UploaderID = users.userID) WHERE file.FileID = ? AND file.FileStatus = 1")) {
+                if($stmt5 = $conn->prepare("SELECT users.Username, file.Filename, file.UploadDate, file.ModifiedDate, file.VersionNumber, file.FileID, file.Filepath, file.ApprovalStatus FROM file LEFT JOIN (users) ON (file.UploaderID = users.userID) WHERE file.FileID = ? AND file.FileStatus = 1")) {
                     $stmt5->bind_param("i",$approveFileID);
                     $stmt5->execute();
                     $stmt5->store_result();
-                    $stmt5->bind_result($displayName, $filename, $uploadDate, $versionNumber, $fileID, $filePath, $approvalStatus);
+                    $stmt5->bind_result($displayName, $filename, $uploadDate, $modifiedDate, $versionNumber, $fileID, $filePath, $approvalStatus);
 
                     while($stmt5->fetch()) {
                         $manage_files .= "<table class='table table-hover table-striped'>
@@ -132,12 +133,12 @@ require_once('header.php');
                                         <td>" . $uploadDate . "</td>
                                     </tr>
                                     <tr>
-                                        <td>Approval Status:  </td>
-                                        <td>" . $approvalStatus . "</td>
+                                        <td>ModifiedDate: </td>
+                                        <td>" . $modifiedDate . "</td>
                                     </tr>
                                     <tr>
-                                        <td>Upload Date: </td>
-                                        <td>" . $uploadDate . "</td>
+                                        <td>Approval Status:  </td>
+                                        <td>" . $approvalStatus . "</td>
                                     </tr>
                                     </table>";
 
