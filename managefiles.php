@@ -47,7 +47,7 @@ require_once('header.php');
                }
 
                 //Insert user's comment into comment table if there is one
-                if($comment = $conn->prepare("INSERT INTO comment (CommentID,FileID,CommenterID,Comment,ApprovalStatus) VALUES (NULL,?,?,?,'Approved')")) {
+                if($comment = $conn->prepare("INSERT INTO comment (CommentID,FileID,CommenterID,Comment,ApprovalStatus) VALUES (NULL,?,?,?,'Rejected')")) {
                     if($userComment == '') {
                         $userComment = "No Comment Given.";
                     }
