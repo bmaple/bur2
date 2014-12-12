@@ -118,7 +118,7 @@ require_once('header.php');
                         $manage_files .= "<table class='table table-hover table-striped'>
                                     <tr>
                                         <td>File Name: </td>
-                                        <td><a download href=" . $filePath . ">" . $filename . "</a></td>
+                                        <td><a download href=" . $conn->escape_string($filePath) . ">" . $filename . "</a></td>
                                     </tr>
                                     <tr>
                                         <td>Author: </td>
