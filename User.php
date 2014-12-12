@@ -112,6 +112,11 @@ class User {
         }
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
         $this->id = $row["UserID"]; 
+        $default_group = "insert into groupmembers (UserID, GroupID) values('$this->id', '1')";
+        if(!$result = mysqli_query($this->dbConnection, $default_group)) {
+            //print ("<p>Could not execute query</p>");
+            //die(mysqli_error($this->dbConnection));    
+        }
         mysqli_close($this->dbConnection); 
         $_SESSION['user'] = serialize($this);
         $_SESSION[$this->GetLoginSessionVar()] = $this->username;
