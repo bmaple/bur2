@@ -164,7 +164,7 @@ class User {
         $auth_query="select password from users where username='$this->username'";
         $result = mysqli_query($this->dbConnection, $auth_query);
         $row = mysqli_fetch_row($result);
-        echo $row[0];
+        //echo $row[0];
         //mysqli_close($this->dbConnection); 
         if($this->password == $row[0])
             return true;
