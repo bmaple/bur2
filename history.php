@@ -74,10 +74,6 @@ require_once('check.php');
                                         <td>Approval Status:  </td>
                                         <td>" . $approvalStatus . "</td>
                                     </tr>
-                                    <tr>
-                                        <td>Upload Date: </td>
-                                        <td>" . $uploadDate . "</td>
-                                    </tr>
                                     </table>";
             }
         }
