@@ -124,7 +124,7 @@ require_once('check.php');
             $stmt->execute();
             $stmt->bind_result($displayName, $filename, $uploadDate, $modifiedDate, $versionNumber, $fileID, $filePath, $approvalStatus);
             while($stmt->fetch()) {
-                $my_files .= "    <table class='table table-hover table-striped'>
+                $my_files .= "<table class='table table-hover table-striped'>
                                     <tr>
                                         <td>File Name: </td>
                                         <td><a download href=" . $filePath . ">" . $filename . "</a></td>
@@ -141,8 +141,8 @@ require_once('check.php');
                                         <td>Upload Date: </td>
                                         <td>" . $uploadDate . "</td>
                                     </tr>
-                                    tr>
-                                        <td>Modified Date: </td>
+                                    <tr>
+                                        <td>ModifiedDate: </td>
                                         <td>" . $modifiedDate . "</td>
                                     </tr>
                                     <tr>

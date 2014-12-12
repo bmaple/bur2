@@ -39,7 +39,7 @@ if(isset($_GET['file_id'])) {
                 <div class="row">
                     <div class="col-lg-4"></div>
                     <div class="col-lg-4">
-                        <h1>Upload Files</h1>
+                        <h1 style="text-align:center;">Upload Files</h1>
                         <form enctype="multipart/form-data" role="form" method="POST" action="uploader.php">
 
                             <div class="form-group">

@@ -153,7 +153,7 @@ require_once('header.php');
                                               <textarea name='userComment' maxlength='255' rows='2' cols='25'></textarea>
                                               </form>";
                         }
-                        $manage_files .= "</div>";
+                        //$manage_files .= "</div>";
                     }
                 }
             }
@@ -188,14 +188,16 @@ require_once('header.php');
             <div class="container-fluid">
 
                 <div class="row">
-                    <div class="col-lg-6">
-						<?php print $manage_files ?>
-
-                    </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-3">
                         
 
                     </div>
+                    <div class="col-lg-6">
+                        <h1 style="text-align:center;">Manage Files</h1>
+						<?php print $manage_files ?>
+
+                    </div>
+                    
                 </div>
                 <!-- /.row -->
 
