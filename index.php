@@ -63,6 +63,7 @@ if(isset($_POST['submit'])){
                             <label for="password">Password: </label>
                             <input type='password' class="form-control" name='password' id='password' maxlength='20' /> <br />
                             <input type='submit' name='submit' id='submit'value="Login" />
+                            <a href='register.php'>Sign up</a>
                         </form>
 
                     </div>
