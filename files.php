@@ -20,6 +20,7 @@ require_once('check.php');
     $approvalId = '';
     $selectedStatus = '';
     $fileVersion = '';
+    $modifiedDate = '';
     $totalApproval = true;
     $commenterName = '';
     $commenterStatus = '';
@@ -119,9 +120,9 @@ require_once('check.php');
         }*/
         //DISPLAY USER'S PERSONAL FILES
         //Gather User's Personal Files
-        if ($stmt = $conn->prepare("SELECT users.Username, file.Filename, file.UploadDate, file.VersionNumber, file.FileID, file.Filepath, file.ApprovalStatus FROM file LEFT JOIN (users) ON (file.UploaderID = users.UserID) WHERE file.UploaderID='$userID' AND file.FileStatus = 1")) {  
+        if ($stmt = $conn->prepare("SELECT users.Username, file.Filename, file.UploadDate, file.ModifiedDate, file.VersionNumber, file.FileID, file.Filepath, file.ApprovalStatus FROM file LEFT JOIN (users) ON (file.UploaderID = users.UserID) WHERE file.UploaderID='$userID' AND file.FileStatus = 1")) {  
             $stmt->execute();
-            $stmt->bind_result($displayName, $filename, $uploadDate, $versionNumber, $fileID, $filePath, $approvalStatus);
+            $stmt->bind_result($displayName, $filename, $uploadDate, $modifiedDate, $versionNumber, $fileID, $filePath, $approvalStatus);
             while($stmt->fetch()) {
                 $my_files .= "    <table class='table table-hover table-striped'>
                                     <tr>
@@ -140,13 +141,13 @@ require_once('check.php');
                                         <td>Upload Date: </td>
                                         <td>" . $uploadDate . "</td>
                                     </tr>
+                                    tr>
+                                        <td>Modified Date: </td>
+                                        <td>" . $modifiedDate . "</td>
+                                    </tr>
                                     <tr>
                                         <td>Approval Status:  </td>
                                         <td>" . $approvalStatus . "</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Upload Date: </td>
-                                        <td>" . $uploadDate . "</td>
                                     </tr>
                                     </table>";
                 $my_files .= "<form method='post' action='history.php'><button type='submit' name='history' class='btn btn-default' value='" . $filename . "'>File History</button>
