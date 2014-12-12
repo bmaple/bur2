@@ -142,7 +142,7 @@ require_once('check.php');
                                         <td>" . $uploadDate . "</td>
                                     </tr>
                                     <tr>
-                                        <td>ModifiedDate: </td>
+                                        <td>Modified Date: </td>
                                         <td>" . $modifiedDate . "</td>
                                     </tr>
                                     <tr>
