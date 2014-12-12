@@ -98,13 +98,13 @@ require_once('header.php');
                     if($currentRow == 0) {
                         $commentArea .= "<div class='comment_table'><table border='5'>
                                         <tr>
-                                            <th>Commenter</th>
-                                            <th>Comment</th>
+                                            <th style = 'padding: 1em;'>Commenter</th>
+                                            <th style = 'padding: 1em;'>Comment</th>
                                         </tr>";
                     }
                     $commentArea .= "<tr>
-                                        <td>Name: " . $commenterName . "<br> Status: " . $commenterStatus . "</td>
-                                        <td>" .  $commenterComment . "</td>
+                                        <td style = 'padding: 1em;'>Name: " . $commenterName . "<br> Status: " . $commenterStatus . "</td>
+                                        <td style = 'padding: 1em;'>" .  $commenterComment . "</td>
                                     </tr>";
                     $currentRow++;
                 }
