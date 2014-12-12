@@ -47,6 +47,7 @@
 			
 			#This is for version control
 			$target_path = $target_path . $version . "_" . basename( $_FILES['uploadedfile']['name']); 
+			preg_replace('/\s+/', '_', $target_path);
 			
 			if ($stmt = $conn->prepare("INSERT INTO file (Filename, Filepath, FileType, VersionNumber, UploaderID, UploadDate, ModifiedDate, ApprovalStatus, FileStatus, Description) VALUES (?,?,?,?,?,CURDATE(),CURDATE(),'Not Submitted',1,?)")) {  
 				$stmt->bind_param("sssiis",basename($_FILES['uploadedfile']['name']),$target_path,pathinfo($_FILES['uploadedfile']['name'], PATHINFO_EXTENSION),$version,$userID,$_POST['file_comments']);
