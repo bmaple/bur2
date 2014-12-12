@@ -47,8 +47,8 @@
 			
 			#This is for version control
 			$target_path = $target_path . $version . "_" . basename( $_FILES['uploadedfile']['name']); 
-			$target_path = preg_replace('/\s+/g', '_', $target_path);
-			echo $target_path;
+			$target_path = str_replace(' ', '_', $target_path);
+			echo "Our target path is " . $target_path . "</br>";
 			
 			if ($stmt = $conn->prepare("INSERT INTO file (Filename, Filepath, FileType, VersionNumber, UploaderID, UploadDate, ModifiedDate, ApprovalStatus, FileStatus, Description) VALUES (?,?,?,?,?,CURDATE(),CURDATE(),'Not Submitted',1,?)")) {  
 				$stmt->bind_param("sssiis",basename($_FILES['uploadedfile']['name']),$target_path,pathinfo($_FILES['uploadedfile']['name'], PATHINFO_EXTENSION),$version,$userID,$_POST['file_comments']);
@@ -65,6 +65,7 @@
 				}
 			} else{
 				$conn->rollback();
+				echo $conn->error;
 				echo "There was an error uploading the file, please try again!";
 				exit(1);
 			}
@@ -104,8 +105,8 @@
 			
 			$new_version += intval($version);
 			
-			$target_path = $target_path . $new_version . "_" . $filename; 
-			$target_path = preg_replace('/\s+/g', '_', $target_path);
+			$target_path = $target_path . $new_version . "_" . $filename; 	
+			$target_path = str_replace(' ', '_', $target_path);
 			
 			if ($stmt = $conn->prepare("INSERT INTO file (Filename, Filepath, FileType, VersionNumber, UploaderID, UploadDate, ModifiedDate, ApprovalStatus, FileStatus, Description) VALUES (?,?,?,?,?,?,CURDATE(),'Not Submitted',1,?)")) {  
 				$stmt->bind_param("ssssiss",$filename,$target_path,pathinfo($_FILES['uploadedfile']['name'], PATHINFO_EXTENSION),$new_version,$userID,$uploadDate,$_POST['file_comments']);
@@ -136,6 +137,5 @@
 		}
 	}
 	
-	echo $conn->error;
 	#redirect_to("files.php");
 ?> 
