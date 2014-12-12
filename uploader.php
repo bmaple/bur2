@@ -47,7 +47,7 @@
 			
 			#This is for version control
 			$target_path = $target_path . $version . "_" . basename( $_FILES['uploadedfile']['name']); 
-			preg_replace('/\s+/g', '_', $target_path);
+			$target_path = preg_replace('/\s+/g', '_', $target_path);
 			echo $target_path;
 			
 			if ($stmt = $conn->prepare("INSERT INTO file (Filename, Filepath, FileType, VersionNumber, UploaderID, UploadDate, ModifiedDate, ApprovalStatus, FileStatus, Description) VALUES (?,?,?,?,?,CURDATE(),CURDATE(),'Not Submitted',1,?)")) {  
@@ -105,6 +105,7 @@
 			$new_version += intval($version);
 			
 			$target_path = $target_path . $new_version . "_" . $filename; 
+			$target_path = preg_replace('/\s+/g', '_', $target_path);
 			
 			if ($stmt = $conn->prepare("INSERT INTO file (Filename, Filepath, FileType, VersionNumber, UploaderID, UploadDate, ModifiedDate, ApprovalStatus, FileStatus, Description) VALUES (?,?,?,?,?,?,CURDATE(),'Not Submitted',1,?)")) {  
 				$stmt->bind_param("ssssiss",$filename,$target_path,pathinfo($_FILES['uploadedfile']['name'], PATHINFO_EXTENSION),$new_version,$userID,$uploadDate,$_POST['file_comments']);
