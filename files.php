@@ -172,7 +172,7 @@ require_once('check.php');
                                   <button type='submit' name='commentFile' value= '" . $fileID . "'>Comments</button>
                                   </form>";
                 }
-                $my_files .= "</div>";
+               // $my_files .= "</div>";
             }
         }
         /*//Gather files user must approve
