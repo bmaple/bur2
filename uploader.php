@@ -48,7 +48,6 @@
 			#This is for version control
 			$target_path = $target_path . $version . "_" . basename( $_FILES['uploadedfile']['name']); 
 			$target_path = str_replace(' ', '_', $target_path);
-			echo "Our target path is " . $target_path . "</br>";
 			
 			if ($stmt = $conn->prepare("INSERT INTO file (Filename, Filepath, FileType, VersionNumber, UploaderID, UploadDate, ModifiedDate, ApprovalStatus, FileStatus, Description) VALUES (?,?,?,?,?,CURDATE(),CURDATE(),'Not Submitted',1,?)")) {  
 				$stmt->bind_param("sssiis",basename($_FILES['uploadedfile']['name']),$target_path,pathinfo($_FILES['uploadedfile']['name'], PATHINFO_EXTENSION),$version,$userID,$_POST['file_comments']);
@@ -137,5 +136,5 @@
 		}
 	}
 	
-	#redirect_to("files.php");
+	redirect_to("files.php");
 ?> 
